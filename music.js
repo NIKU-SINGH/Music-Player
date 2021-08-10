@@ -2,10 +2,10 @@ const music  =   document.querySelector("audio");
 const play   =   document.getElementById("play");
 const img    =   document.querySelector("img");
 const body   =   document.querySelector("body");
-// const artist =   document.getElementByClassName("artist");
-// const song   =   document.getElementByClassName("song-name");
-// const next   =   document.getElementById("next");
-// const prev   =   document.getElementById("prev");
+const artist =   document.getElementById("artist");
+const song   =   document.getElementById("song-name");
+const next   =   document.getElementById("next");
+const prev   =   document.getElementById("prev");
 
 
 let isPlaying = false;
@@ -48,33 +48,33 @@ const changeBackground = () => {
 };
 
 // Songs List
-// var songs =[
-//       {
-//             song:"Sunflower",
-//             artist="Post Malone",
-//             name:"song1"
-//       },
-//       {
-//             song:"Faded",
-//             artist="Alan Walker",
-//             name="song2"
-//       },
-//       {
-//             song:"Wake me up",
-//             artist="Alan Walker",
-//             name="song3"
-//       },
-//       {
-//             song:"Safari",
-//             artist="Serena",
-//             name="song4"
-//       }
+var songs =[
+      {
+            audio:"SUNFLOWER",
+            artist:"Post Malone",
+            name:"song1"
+      },
+      {
+            audio:"FADED",
+            artist:"Alan Walker",
+            name:"song2"
+      },
+      {
+            audio:"RISE AGAIN",
+            artist:"Alan Wayne",
+            name:"song3"
+      },
+      {
+            audio:"SAFARI",
+            artist:"Serena",
+            name:"song4"
+      }
 
-// ];
+];
 
 // Song changing function
 const loadSong = (songs) => {
-      song.textContent = songs.name;
+      song.textContent = songs.audio;
       artist.textContent = songs.artist;
       music.src = "audios/" + songs.name + ".mp3";
       img.src = "images/" + songs.name + ".jpg";
@@ -85,10 +85,15 @@ let songIndex =0;
 const nextSong = () => {
       songIndex = (songIndex+1) % songs.length;
       loadSong(songs[songIndex]);
+      PauseMusic();
+      changeBackground();
 };
 
 const prevSong = () => {
-
+      songIndex = (songIndex -1 + songs.length) % songs.length;
+      loadSong(songs[songIndex]);
+      PauseMusic();
+      changeBackground();
 }
 
 // Events to happen when clicked
@@ -96,12 +101,10 @@ play.addEventListener('click', ()=>{
       if(isPlaying)
       {
             PauseMusic();
-            changeBackground();
       }
       else
       {
             PlayMusic();
-            changeBackground();
       }
 });
 

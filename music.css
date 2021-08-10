@@ -116,13 +116,13 @@ body{
 {
       color: var(--lightblack);
 }
-.song-details .song-name
+.song-details #song-name
 {
       font-size: 21px;
       text-transform: uppercase;
       text-shadow: 0 0.3rem 0.5rem rgba(0,0,0,0.3);
 }
-.song-details .artist
+.song-details #artist
 {
       font-size: 18px;
       opacity: 0.9;
