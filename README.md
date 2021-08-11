@@ -1,6 +1,6 @@
 # Music-Player
 
-A Basic Music Player With Custom features
+A Basic Music Player With Custom features,
 
 Music Player Link -> [Music Player](https://niku-singh.github.io/Music-Player/)
 
