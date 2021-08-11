@@ -20,9 +20,6 @@
       --pinkshadow: #ffcbdd;
       --lightbshadow: rgba(0,0,0,0.15);
       --background1:linear-gradient(45deg, red, blue);
-      /* --background2:linear-gradient(145deg,var(--blue) 0%, var(--dark-blue) 70%);
-      --background3: linear-gradient(145deg, orange 40%, cyan);
-      --background4: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%); */
      }
 
 body{
@@ -140,11 +137,10 @@ body{
 .progress-area .progress-bar
 {
       height: inherit;
-      width: 50%;
+      width: 0%;
       position: relative;
       border-radius: inherit;
-      background: royalblue;
-      /* background: linear-gradient(90deg, var(--pink) 0%, var(--violet) 100%); */
+      background: var(--lightblack);
 }
 .progress-bar::before
 {
