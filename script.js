@@ -6,6 +6,11 @@ const artist =   document.getElementById("artist");
 const song   =   document.getElementById("song-name");
 const next   =   document.getElementById("next");
 const prev   =   document.getElementById("prev");
+const progress_area = document.getElementById("progress-area");
+let progress =   document.getElementById("progress-bar");
+let max_duration =   document.getElementById("max-duration");
+let current_time =  document.getElementById("current-time");
+
 
 
 let isPlaying = false;
@@ -50,22 +55,22 @@ const changeBackground = () => {
 // Songs List
 var songs =[
       {
-            audio:"SUNFLOWER",
-            artist:"Post Malone",
+            audio:"BEATS",
+            artist:"Shawn Hughes",
             name:"song1"
       },
       {
-            audio:"FADED",
-            artist:"Alan Walker",
+            audio:"REMEMBER",
+            artist:"Shawn Walker",
             name:"song2"
       },
       {
-            audio:"RISE AGAIN",
+            audio:"EVERLAST",
             artist:"Alan Wayne",
             name:"song3"
       },
       {
-            audio:"SAFARI",
+            audio:"AWAKE",
             artist:"Serena",
             name:"song4"
       }
@@ -85,14 +90,14 @@ let songIndex =0;
 const nextSong = () => {
       songIndex = (songIndex+1) % songs.length;
       loadSong(songs[songIndex]);
-      PauseMusic();
+      PlayMusic();
       changeBackground();
 };
 
 const prevSong = () => {
       songIndex = (songIndex -1 + songs.length) % songs.length;
       loadSong(songs[songIndex]);
-      PauseMusic();
+      PlayMusic();
       changeBackground();
 }
 
@@ -108,6 +113,48 @@ play.addEventListener('click', ()=>{
       }
 });
 
+// Progress bar 
+music.addEventListener('timeupdate' ,(event) =>{
+      // Want to know more here DOUBT
+      const {currentTime,duration} = event.target;
+      let progress_time = (currentTime / duration) * 100;
+      progress.style.width = `${progress_time}%`;     
+      
+      // Song current time update
+      let min_current = Math.floor(currentTime / 60);
+      let sec_current = Math.floor(currentTime % 60);
+      if(sec_current < 10)
+      {
+            sec_current = `0${sec_current}`;
+      }
+      let current_duration = `${min_current}:${sec_current}`;
+      
+      current_time.textContent = `${current_duration}`;
+      
+
+      // Song duration update
+      let min_time = Math.floor(duration / 60);
+      let sec_time = Math.floor(duration % 60);
+      let total_duration = `${min_time}:${sec_time}`;
+      
+      // if not done it prints NAN on song changing
+      if(duration)
+      {
+            max_duration.textContent = `${total_duration}`;
+      }
+});
+
+// to skip to the song when clicked in progress area
+progress_area.addEventListener('click',(event) =>{
+      // const duration = music.duration;
+      const {duration} = music;
+      let move_progress = 
+      (event.offsetX / event.target.clientWidth) * duration;
+      music.currentTime = move_progress;
+});
+
+// to change the music when it ends
+music.addEventListener('ended',nextSong);
 next.addEventListener('click',nextSong);
 prev.addEventListener('click',prevSong);
 
